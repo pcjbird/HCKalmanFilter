@@ -10,7 +10,7 @@ import Foundation
 import MapKit
 import Surge
 
-open class HCKalmanAlgorithm
+@objc open class HCKalmanAlgorithm: NSObject
 {
     //MARK: - HCKalmanAlgorithm properties
     
@@ -33,7 +33,7 @@ open class HCKalmanAlgorithm
     /// Default value is 29.0, this is the recommended value for the GPS problem, with this value filter provides optimal accuracy.
     /// This value can be adjusted depending on the needs, the higher value
     /// of **rVaule** variable will give greater roundness trajectories, and vice versa.
-    open var rValue: Double {
+    @objc open var rValue: Double {
         set
         {
             _rValue = newValue
@@ -105,15 +105,16 @@ open class HCKalmanAlgorithm
     ///                      at the moment when algorithm start
     public init(initialLocation: CLLocation)
     {
-        self.previousMeasureTime = Date()
-        self.previousLocation = CLLocation()
-        
         self.xk1 = HCMatrixObject(rows: stateMDimension, columns: stateNDimension)
         self.Pk1 = HCMatrixObject(rows: stateMDimension, columns: stateMDimension)
         self.A = HCMatrixObject(rows: stateMDimension, columns: stateMDimension)
         self.Qt = HCMatrixObject(rows: stateMDimension, columns: stateMDimension)
         self.R = HCMatrixObject(rows: stateMDimension, columns: stateMDimension)
         self.zt = HCMatrixObject(rows: stateMDimension, columns: stateNDimension)
+        self.previousMeasureTime = Date()
+        self.previousLocation = CLLocation()
+        
+        super.init()
         
         initKalman(initialLocation: initialLocation)
     }
@@ -154,7 +155,7 @@ open class HCKalmanAlgorithm
     /// - parameters:
     ///   - newStartLocation: this is CLLocation object which represent location
     ///                       at the moment when algorithm start again
-    open func resetKalman(newStartLocation: CLLocation)
+    @objc open func resetKalman(newStartLocation: CLLocation)
     {
         self.initKalman(initialLocation: newStartLocation)
     }
@@ -168,7 +169,7 @@ open class HCKalmanAlgorithm
     ///                      **currentLocation** is real position of user, and it will be processed by Kalman Filter.
     /// - returns: CLLocation object with corrected latitude, longitude and altitude values
     
-    open func processState(currentLocation: CLLocation) -> CLLocation
+    @objc open func processState(currentLocation: CLLocation) -> CLLocation
     {
         // Set current timestamp
         let newMeasureTime = currentLocation.timestamp
