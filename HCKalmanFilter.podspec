@@ -16,6 +16,8 @@ s.source           = { :git => "https://github.com/Hypercubesoft/HCKalmanFilter.
 
 s.ios.deployment_target = "9.0"
 s.source_files = "HCKalmanFilter/*"
+s.module_name = "#{s.name}"
+s.header_dir = "HCKalmanFilter"
 
 s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
 
