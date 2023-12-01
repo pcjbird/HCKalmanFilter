@@ -103,7 +103,7 @@ import Surge
     /// - parameters:
     ///   - initialLocation: this is CLLocation object which represent initial location
     ///                      at the moment when algorithm start
-    public init(initialLocation: CLLocation)
+    @objc public init(initialLocation: CLLocation)
     {
         self.xk1 = HCMatrixObject(rows: stateMDimension, columns: stateNDimension)
         self.Pk1 = HCMatrixObject(rows: stateMDimension, columns: stateMDimension)
